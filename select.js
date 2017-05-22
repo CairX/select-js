@@ -1,4 +1,5 @@
 /* global ClassName */
+/* exported Select */
 
 "use strict";
 
@@ -87,7 +88,3 @@ var Select = (function() {
 		"create": create
 	};
 })();
-
-var selects = document.querySelectorAll("select");
-Select.create(selects[0]);
-Select.create(selects[1]);
