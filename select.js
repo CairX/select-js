@@ -82,6 +82,7 @@ var Select = (function() {
 		} else {
 			option.removeAttribute("selected");
 		}
+		select.dispatchEvent(new Event("change"));
 	};
 
 	return {
