@@ -6,8 +6,9 @@
 var Select = (function() {
 	var create = function(select) {
 		var container = markupContainer();
+		var arrow = markupArrow();
 		var drop = markupDrop();
-		var header = markupHeader(drop, select.getAttribute("placeholder"));
+		var header = markupHeader(drop, arrow, select.getAttribute("placeholder"));
 		select.querySelectorAll("option").forEach(function(option, index) {
 			var item = markupOption(select, option, index);
 			drop.appendChild(item);
@@ -15,6 +16,7 @@ var Select = (function() {
 
 		// Insert markup into the DOM.
 		select.insertAdjacentElement("afterend", container);
+		header.appendChild(arrow);
 		container.appendChild(header);
 		container.appendChild(drop);
 
@@ -28,15 +30,21 @@ var Select = (function() {
 		return container;
 	};
 
-	var markupHeader = function(drop, text) {
+	var markupHeader = function(drop, arrow, text) {
 		var header = document.createElement("button");
 		header.setAttribute("class", "select-header");
 		header.innerHTML = text;
 		header.addEventListener("click", function() {
-			toggleDrop(drop);
+			toggleDrop(drop, arrow);
 		});
-		toggleDrop(drop);
+		toggleDrop(drop, arrow);
 		return header;
+	};
+
+	var markupArrow = function() {
+		var arrow = document.createElement("span");
+		arrow.setAttribute("class", "select-arrow");
+		return arrow;
 	};
 
 	var markupDrop = function() {
@@ -66,11 +74,13 @@ var Select = (function() {
 		return li;
 	};
 
-	var toggleDrop = function(drop) {
+	var toggleDrop = function(drop, arrow) {
 		if (ClassName.has(drop, "select-hide")) {
 			ClassName.remove(drop, "select-hide");
+			arrow.innerHTML = "&#9652;";
 		} else {
 			ClassName.append(drop, "select-hide");
+			arrow.innerHTML = "&#9662;";
 		}
 	};
 

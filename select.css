@@ -7,6 +7,9 @@
 	border: 1px solid;
 	border-radius: 0.2rem;
 }
+.select-arrow {
+	margin-left: 0.25rem;
+}
 .select-drop {
 	position: absolute;
 
